@@ -1,0 +1,25 @@
+---
+title: "Prediciton of MHC-I bound peptides"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(iedb)
+```
+
+# Load the protein sequence
+
+Has to be translated first! This has to be imporved!
+
+```{r}
+
+sequence <- "PPWPGLCSSSPPHSGHRLLGPVCPDSASLRVRVSWTVSHHLLHWNQQ"
+
+predict_mhc_peptides(sequence,c("HLA-A*02:01","HLA-A*01:01",
+                                "HLA-A*03:01","HLA-A*11:01") , "consensus", c(10,10,10,10))
+```
+

@@ -1,0 +1,18 @@
+Package: MHCpredIEDB
+Type: Package
+Title: Run IEDB analysis tools for MHC binding prediction
+Version: 0.0.1
+Authors@R: c(
+    person("Katharina", "Imkeller", email = "k.imkeller@dkfz.de", role = c("cre", "aut")))
+Description: Package to access and run IEDB analysis tools via the provided curl API.
+License: GPL-3
+Encoding: UTF-8
+LazyData: false
+Depends: R (>= 3.6)
+Imports: Biostrings, curl
+Suggests: knitr, testthat
+VignetteBuilder: knitr
+RoxygenNote: 7.0.0
+biocViews: Software
+URL: https://github.com/imkeller/MHCpredIEDB
+BugReports: https://github.com/imkeller/MHCpredIEDB/issues 
