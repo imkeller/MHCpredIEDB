@@ -29,16 +29,29 @@ check_protein_sequence <- function(protein_input) {
     } else {protein_sequences}
 }
 
-check_hla_alleles <- function(hla_alleles, mhc_class) {
-    # check if hla_alleles are in the list that is supported by IEDB
-    # reference allele list
+
+#' Title
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' 
+get_allele_reference_list <- function() {
     reference_list <- tryCatch(
         # try to download reference list and report error in case not possible
         read.table('https://help.iedb.org/hc/en-us/article_attachments/114094079071/hla_ref_set.class_i.txt'),
         error = function(e){
             print("Could not download the reference HLA list.")
             print(e)
-    })
+        })
+    reference_list
+}
+
+check_hla_alleles <- function(hla_alleles, mhc_class) {
+    # check if hla_alleles are in the list that is supported by IEDB
+    # reference allele list
+    reference_list <- get_allele_reference_list()
     
     # data frame needs some splitting
     reference_hlas <- sapply(as.character(reference_list$V1), 
@@ -52,10 +65,11 @@ check_hla_alleles <- function(hla_alleles, mhc_class) {
     # is there a missing allele?
     if(all(bool_contained)) {
         TRUE
-    } else {
-            stop(sprintf(
+    } else { # this should only be a warning, let's see how it works for alleles that are not in the list
+            warning(sprintf(
                 "Not all your input HLA alleles are present in the reference list. Following input is missing: %s",
                 paste(missing_allele, collapse = ", ")))
+        TRUE
     }
 }
 
